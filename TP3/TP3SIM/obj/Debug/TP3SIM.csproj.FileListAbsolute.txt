@@ -20,3 +20,14 @@ C:\Users\lauta\OneDrive\Desktop\TP3SIM\obj\Debug\TP3SIM.csproj.GenerateResource.
 C:\Users\lauta\OneDrive\Desktop\TP3SIM\obj\Debug\TP3SIM.csproj.CoreCompileInputs.cache
 C:\Users\lauta\OneDrive\Desktop\TP3SIM\obj\Debug\TP3SIM.exe
 C:\Users\lauta\OneDrive\Desktop\TP3SIM\obj\Debug\TP3SIM.pdb
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\bin\Debug\TP3SIM.exe.config
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\bin\Debug\TP3SIM.exe
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\bin\Debug\TP3SIM.pdb
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.csprojAssemblyReference.cache
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.GenerarGrafico.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.Main.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.Properties.Resources.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.csproj.GenerateResource.cache
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.csproj.CoreCompileInputs.cache
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.exe
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.pdb

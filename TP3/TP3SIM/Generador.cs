@@ -58,10 +58,49 @@ namespace TP3SIM
 
             return numeros;
         }
-
-        /*public static List<double> Poisson(float lambda, int cantidad)
+        public static  float Factorial(float fact)
         {
-            
-        }*/
+            float numero, resultado = 1;
+
+            numero = fact;
+
+            for (int i = 1; i <= numero; i++)
+            {
+                resultado = resultado * i;
+            }
+            return resultado;
+        }
+
+        public static List<double> Poisson(float lambda, int cantidad)
+        { var euler = Math.E;
+            double acum = 0;
+            var poisson = new List<double>();
+            for (int x = 0; acum < 0.999; x++)
+            {
+                poisson.Add(Math.Round(acum, 3));
+                var valor = Math.Pow(lambda, x) * Math.Pow(euler, (-1)*lambda) / Factorial(x);
+                acum = valor + acum;
+
+            } 
+            var numeros = new List<double>();
+            for (int i = 0; i < cantidad; i++)
+            {
+                var num = 0;
+                //Generar numeros aleatorio entre 0 y 1
+                var r = random.NextDouble();
+
+                for (int f = 0; f < poisson.Count(); f++)
+                {
+                    if (r > poisson[f])
+                    {
+                        num++;
+                    }
+                }
+                numeros.Add(num);
+
+            }
+
+            return numeros;
+        }
     }
 }

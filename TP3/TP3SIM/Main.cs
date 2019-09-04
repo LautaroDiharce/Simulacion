@@ -114,6 +114,7 @@ namespace TP3SIM
                     GenerarExponencialNegativa();
                     break;
                 case Distribucion.Poisson:
+                    GenerarPoisson();
                     break;
                 default:
                     break;
@@ -194,6 +195,20 @@ namespace TP3SIM
 
         private void GenerarPoisson()
         {
+            float lambda;
+            int cantidad;
+            if (string.IsNullOrEmpty(txtLambdaPoisson.Text) || !float.TryParse(txtLambdaPoisson.Text, out lambda))
+            {
+                MessageBox.Show("Debe cargar un valor valido para 'lambda' para poder generar los valores de las variables", "Advertencia");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtCantValores.Text) || !int.TryParse(txtCantValores.Text, out cantidad))
+            {
+                MessageBox.Show("Debe cargar un valor valido para la cantidad para poder generar los valores de las variables", "Advertencia");
+                return;
+            }
+            Valores = Generador.Poisson(lambda, cantidad);
+            lstValores.DataSource = Valores;
 
         }
 

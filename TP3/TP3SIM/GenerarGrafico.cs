@@ -27,6 +27,7 @@ namespace TP3SIM
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
+            grafico.DataSource = null;
             if (!int.TryParse(txtCantPasos.Text, out cantPasos))
             {
                 MessageBox.Show("Debe cargar la cantidad de pasos para poder graficar los valores", "Advertencia");
