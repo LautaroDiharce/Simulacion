@@ -22,11 +22,14 @@ namespace TP3SIM
 
         Distribucion dist;
         List<double> Valores = new List<double>();
+        
 
         public Main()
         {
             InitializeComponent();
             rbDistUniforme.Checked = true;
+            txtCantValores.MaxLength = 5;
+            
         }
 
         private void RbDistUniforme_CheckedChanged(object sender, EventArgs e)

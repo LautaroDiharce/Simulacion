@@ -69,13 +69,13 @@ namespace TP3SIM
                 frecAbs.Add(esperado);
             }
             double acumulador = 0;
-            for (int i = 0; i < intervalos; i++)
+            for (int i = 0; i < intervalos-1; i++)
             {
                 acumulador = acumulador + Math.Pow((observados[i] - frecAbs[i]),2)/ frecAbs[i];
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos-1-2;
-            var alpha = 0.05;
+            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl,alpha);
             txtTabulado.Text = chi.ToString();       
         }
@@ -85,44 +85,44 @@ namespace TP3SIM
             double acumulador = 0;
             var frecAbs = new List<double>();
             var intervalos = int.Parse(txtInter.Text);
-            var min = observados.Min();
-            var max = observados.Max();
+            var min = Valores.Min();
+            var max = Valores.Max();
             var paso = (max - min) / intervalos;
-            var mean = ArrayStatistics.Mean(observados.ToArray());
-            var desEst=ArrayStatistics.StandardDeviation(observados.ToArray());
+            var mean = ArrayStatistics.Mean(Valores.ToArray());
+            var desEst=ArrayStatistics.StandardDeviation(Valores.ToArray());
             //var mean = CalcularMedia(observados);
             //var desEst = CalcularSD(observados,mean);
-            for (int i =min; i <= max; i+=paso)
+            for (double i =min; i <= max; i+=paso)
             {
                 var sup = MathNet.Numerics.Distributions.Normal.CDF(mean, desEst, i + paso);
                 var inf= MathNet.Numerics.Distributions.Normal.CDF(mean, desEst, i);
-                double esperado = sup -inf;
+                double esperado = Valores.Count()*(sup -inf);
                 frecAbs.Add(esperado);
             }
-            for (int i = 0; i < intervalos; i++)
+            for (int i = 0; i < intervalos-1; i++)
             {
                 acumulador = acumulador + Math.Pow(observados[i] - frecAbs[i], 2) / frecAbs[i];
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos - 1 - 2;
-            var alpha = 0.05;
+            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl, alpha);
             txtTabulado.Text = chi.ToString();
         }
         private void GenerarEN()
         {
             var observados = Seccionar();
-            var array = observados.ToArray();
+            var array = Valores.ToArray();
             double acumulador = 0;
             var frecAbs = new List<double>();
             var intervalos = int.Parse(txtInter.Text);
-            var min = observados.Min();
-            var max = observados.Max();
+            var min = Valores.Min();
+            var max = Valores.Max();
             var paso = (max - min) / intervalos;
             var lambda = 1/ArrayStatistics.Mean(array);
-            for (int i = min; i <= max; i += paso)
+            for (double i = min; i <= max; i += paso)
             {
-                double esperado = MathNet.Numerics.Distributions.Exponential.InvCDF(lambda, i + paso) - MathNet.Numerics.Distributions.Exponential.InvCDF(lambda, i);
+                double esperado = (MathNet.Numerics.Distributions.Exponential.CDF(lambda, i + paso) - MathNet.Numerics.Distributions.Exponential.CDF(lambda, i))*Valores.Count();
                 frecAbs.Add(esperado);
             }
             for (int i = 0; i < intervalos; i++)
@@ -131,24 +131,24 @@ namespace TP3SIM
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos - 1 - 1;
-            var alpha = 0.05;
+            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl, alpha);
             txtTabulado.Text = chi.ToString();
         }
         private void GenerarPoi()
         {
             var observados = Seccionar();
-            var array = observados.ToArray();
+            var array = Valores.ToArray();
             double acumulador = 0;
             var frecAbs = new List<double>();
             var intervalos = int.Parse(txtInter.Text);
-            var min = observados.Min();
-            var max = observados.Max();
+            var min = Valores.Min();
+            var max = Valores.Max();
             var paso = (max - min) / intervalos;
             var lambda = ArrayStatistics.Mean(array);
-            for (int i = min; i <= max; i += paso)
+            for (double i = min; i <= max; i += paso)
             {
-                double esperado = MathNet.Numerics.Distributions.Poisson.CDF(lambda, i + paso) - MathNet.Numerics.Distributions.Exponential.InvCDF(lambda, i);
+                double esperado = Valores.Count()*(MathNet.Numerics.Distributions.Poisson.CDF(lambda, i + paso) - MathNet.Numerics.Distributions.Exponential.CDF(lambda, i));
                 frecAbs.Add(esperado);
             }
             for (int i = 0; i < intervalos; i++)
@@ -157,7 +157,7 @@ namespace TP3SIM
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos - 1 - 1;
-            var alpha = 0.05;
+            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl, alpha);
             txtTabulado.Text = chi.ToString();
         }

@@ -41,6 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -163,11 +164,22 @@
             this.lblResult.Size = new System.Drawing.Size(0, 17);
             this.lblResult.TabIndex = 13;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(349, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(160, 17);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Nivel de confianza=95%";
+            // 
             // PruebaBondad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 210);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -203,5 +215,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.Label label7;
     }
 }
