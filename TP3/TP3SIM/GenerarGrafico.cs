@@ -27,7 +27,7 @@ namespace TP3SIM
 
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
-            grafico.DataSource = null;
+
             if (!int.TryParse(txtCantPasos.Text, out cantPasos))
             {
                 MessageBox.Show("Debe cargar la cantidad de pasos para poder graficar los valores", "Advertencia");
@@ -53,6 +53,14 @@ namespace TP3SIM
                 var valoresEnRango = Valores.Where(x => x >= i && x < (i + paso)).ToList();
                 grafico.Series["Serie1"].Points.AddXY(i, valoresEnRango.Count);
             }            
+        }
+
+        private void BtnLimpiar_Click(object sender, EventArgs e)
+        {
+            foreach (var series in grafico.Series)
+            {
+                series.Points.Clear();
+            }
         }
     }
 }

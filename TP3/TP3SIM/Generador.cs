@@ -70,25 +70,28 @@ namespace TP3SIM
             }
             return resultado;
         }
-
-        public static List<double> Poisson(float lambda, int cantidad)
-        { var euler = Math.E;
+        public static List<double> IntervalosPoisson(float lambda)
+        {
+            var euler = Math.E;
             double acum = 0;
             var poisson = new List<double>();
             for (int x = 0; acum < 0.999; x++)
             {
                 poisson.Add(Math.Round(acum, 3));
-                var valor = Math.Pow(lambda, x) * Math.Pow(euler, (-1)*lambda) / Factorial(x);
+                var valor = Math.Pow(lambda, x) * Math.Pow(euler, (-1) * lambda) / Factorial(x);
                 acum = valor + acum;
-
-            } 
+            }
+            return poisson;
+        }
+        public static List<double> Poisson(float lambda, int cantidad)
+        {
+            var poisson = IntervalosPoisson(lambda);
             var numeros = new List<double>();
             for (int i = 0; i < cantidad; i++)
             {
                 var num = 0;
                 //Generar numeros aleatorio entre 0 y 1
                 var r = random.NextDouble();
-
                 for (int f = 0; f < poisson.Count(); f++)
                 {
                     if (r > poisson[f])
@@ -97,9 +100,7 @@ namespace TP3SIM
                     }
                 }
                 numeros.Add(num);
-
             }
-
             return numeros;
         }
     }

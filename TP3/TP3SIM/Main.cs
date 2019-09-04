@@ -145,6 +145,7 @@ namespace TP3SIM
 
             Valores = Generador.Uniforme(a, b, cantidad);
             lstValores.DataSource = Valores;
+            lblIntervalos.Text = "";
         }
 
         private void GenerarNormal()
@@ -171,6 +172,7 @@ namespace TP3SIM
 
             Valores = Generador.Normal(media, desviacion, cantidad);
             lstValores.DataSource = Valores;
+            lblIntervalos.Text = "";
         }
 
         private void GenerarExponencialNegativa()
@@ -191,6 +193,7 @@ namespace TP3SIM
 
             Valores = Generador.ExponencialNegativa(lambda, cantidad);
             lstValores.DataSource = Valores;
+            lblIntervalos.Text = "";
         }
 
         private void GenerarPoisson()
@@ -209,6 +212,7 @@ namespace TP3SIM
             }
             Valores = Generador.Poisson(lambda, cantidad);
             lstValores.DataSource = Valores;
+            lblIntervalos.Text = Valores.Max().ToString();
 
         }
 
@@ -227,6 +231,41 @@ namespace TP3SIM
 
             GenerarGrafico grafico = new GenerarGrafico(Valores);
             grafico.Show();
+        }
+
+        private void BtnBondad_Click(object sender, EventArgs e)
+        {
+            if (lstValores.DataSource == null)
+            {
+                MessageBox.Show("No hay valores para generar la pruba de bondad", "Advertencia");
+                return;
+            }
+            var d = "";
+            var lista = new List<double>();
+            foreach (var elemento in lstValores.Items)
+            {
+                var ele = double.Parse(elemento.ToString());
+                lista.Add(ele);
+            }
+            switch (dist)
+            {
+                case Distribucion.Uniforme:
+                    d= "Uniforme";
+                    break;
+                case Distribucion.Normal:
+                    d = "Normal";
+                    break;
+                case Distribucion.ExponencialNegativa:
+                    d = "ExponencialNegativa";
+                    break;
+                case Distribucion.Poisson:
+                    d = "Poisson";
+                    break;
+                default:
+                    break;
+            }
+            PruebaBondad bondad = new PruebaBondad(d,lista);
+            bondad.ShowDialog();
         }
     }
 }

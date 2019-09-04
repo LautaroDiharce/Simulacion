@@ -36,6 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtCantPasos = new System.Windows.Forms.MaskedTextBox();
             this.grafico = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grafico)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,11 +98,23 @@
             this.grafico.TabIndex = 5;
             this.grafico.Text = "Grafico";
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.Location = new System.Drawing.Point(127, 322);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(95, 34);
+            this.btnLimpiar.TabIndex = 6;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
+            // 
             // GenerarGrafico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 607);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.grafico);
             this.Controls.Add(this.txtCantPasos);
             this.Controls.Add(this.label2);
@@ -122,5 +135,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MaskedTextBox txtCantPasos;
         private System.Windows.Forms.DataVisualization.Charting.Chart grafico;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }

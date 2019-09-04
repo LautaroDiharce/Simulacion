@@ -31,3 +31,7 @@ C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.
 C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.csproj.CoreCompileInputs.cache
 C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.exe
 C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.pdb
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.PruebaBondad.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\bin\Debug\MathNet.Numerics.dll
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\bin\Debug\MathNet.Numerics.xml
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\TP3\TP3SIM\obj\Debug\TP3SIM.csproj.CopyComplete

@@ -50,6 +50,9 @@
             this.btnGenerarValores = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnExcel = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblIntervalos = new System.Windows.Forms.Label();
+            this.btnBondad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rbDistNormal
@@ -263,19 +266,50 @@
             // btnExcel
             // 
             this.btnExcel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExcel.Location = new System.Drawing.Point(527, 564);
+            this.btnExcel.Location = new System.Drawing.Point(480, 564);
             this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(152, 33);
+            this.btnExcel.Size = new System.Drawing.Size(127, 33);
             this.btnExcel.TabIndex = 22;
             this.btnExcel.Text = "Generar grafico";
             this.btnExcel.UseVisualStyleBackColor = true;
             this.btnExcel.Click += new System.EventHandler(this.BtnExcel_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(71, 467);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 13);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Intervalos sugeridos:";
+            // 
+            // lblIntervalos
+            // 
+            this.lblIntervalos.AutoSize = true;
+            this.lblIntervalos.Location = new System.Drawing.Point(181, 467);
+            this.lblIntervalos.Name = "lblIntervalos";
+            this.lblIntervalos.Size = new System.Drawing.Size(0, 13);
+            this.lblIntervalos.TabIndex = 24;
+            // 
+            // btnBondad
+            // 
+            this.btnBondad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBondad.Location = new System.Drawing.Point(613, 564);
+            this.btnBondad.Name = "btnBondad";
+            this.btnBondad.Size = new System.Drawing.Size(114, 33);
+            this.btnBondad.TabIndex = 25;
+            this.btnBondad.Text = "Bondad";
+            this.btnBondad.UseVisualStyleBackColor = true;
+            this.btnBondad.Click += new System.EventHandler(this.BtnBondad_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 637);
+            this.Controls.Add(this.btnBondad);
+            this.Controls.Add(this.lblIntervalos);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnGenerarValores);
@@ -329,6 +363,9 @@
         private System.Windows.Forms.Button btnGenerarValores;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblIntervalos;
+        private System.Windows.Forms.Button btnBondad;
     }
 }
 
