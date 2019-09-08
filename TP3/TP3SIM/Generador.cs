@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TP3SIM
 {
@@ -26,6 +27,7 @@ namespace TP3SIM
 
         public static List<double> Normal(float media, float desviacionEstandar, int cantidad)
         {
+
             var numeros = new List<double>();
             for (int i = 0; i < cantidad; i++)
             {

@@ -28,7 +28,7 @@ namespace TP3SIM
         {
             InitializeComponent();
             rbDistUniforme.Checked = true;
-            txtCantValores.MaxLength = 5;
+            txtCantValores.MaxLength = 6;
             
         }
 
@@ -103,24 +103,81 @@ namespace TP3SIM
         }
 
         private void BtnGenerarValores_Click(object sender, EventArgs e)
-        {
-            lstValores.DataSource = null;
-            switch (dist)
+        {   int i;
+            bool success = int.TryParse(txtCantValores.Text,out i);
+            if (success is true && i>0)
             {
-                case Distribucion.Uniforme:
-                    GenerarUniforme();
-                    break;
-                case Distribucion.Normal:
-                    GenerarNormal();
-                    break;
-                case Distribucion.ExponencialNegativa:
-                    GenerarExponencialNegativa();
-                    break;
-                case Distribucion.Poisson:
-                    GenerarPoisson();
-                    break;
-                default:
-                    break;
+
+
+                lstValores.DataSource = null;
+                switch (dist)
+                {
+                    case Distribucion.Uniforme:
+                        double b,a;
+                        bool checkA = double.TryParse(txtUniformeA.Text, out a);
+                        bool checkB = double.TryParse(txtUniformeB.Text, out b);
+                        if (a > b || checkA is false || checkB is false )
+                        {
+                            MessageBox.Show("El valor de A debe ser inferior a B, y ambos deben ser numeros", "advertencia");
+                            txtUniformeA.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            GenerarUniforme();
+                        }
+                        break;
+                    case Distribucion.Normal:
+                        double m, ds;
+                        bool checkM = double.TryParse(txtMedia.Text, out m);
+                        bool checkDS = double.TryParse(txtDesvEstandar.Text, out ds);
+                        if (ds < 0|| !checkM || !checkDS)
+                        {
+                            MessageBox.Show("La desviacion estandar debe ser positiva, y ambos valores ingresados debe ser numeros", "advertencia");
+                            txtMedia.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            GenerarNormal();
+                        }
+                        break;
+                    case Distribucion.ExponencialNegativa:
+                        double l;
+                        bool checkL = double.TryParse(txtLambdaExp.Text, out l);
+                        if (l <= 0|| !checkL)
+                        {
+                            MessageBox.Show("El valor de lambda debe ser positivo y un numero", "advertencia");
+                            txtLambdaExp.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            GenerarExponencialNegativa();
+                        }
+                        break;
+                    case Distribucion.Poisson:
+                        double lp;
+                        bool checkLP = double.TryParse(txtLambdaPoisson.Text, out lp);
+                        if (lp<= 0||!checkLP)
+                        {
+                            MessageBox.Show("El valor de lambda debe ser positivo y un numero", "advertencia");
+                            txtLambdaPoisson.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            GenerarPoisson();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ingrese una cantidad valida de valores a generar", "Advertencia");
+                return;
             }
         }
 
@@ -238,6 +295,7 @@ namespace TP3SIM
 
         private void BtnBondad_Click(object sender, EventArgs e)
         {
+            PruebaBondad bondad = null;
             if (lstValores.DataSource == null)
             {
                 MessageBox.Show("No hay valores para generar la pruba de bondad", "Advertencia");
@@ -250,25 +308,33 @@ namespace TP3SIM
                 var ele = double.Parse(elemento.ToString());
                 lista.Add(ele);
             }
+
             switch (dist)
             {
                 case Distribucion.Uniforme:
                     d= "Uniforme";
+                    bondad = new PruebaBondad(d, lista);
                     break;
                 case Distribucion.Normal:
                     d = "Normal";
+                    bondad = new PruebaBondad(d, lista);
                     break;
                 case Distribucion.ExponencialNegativa:
                     d = "ExponencialNegativa";
+                    bondad = new PruebaBondad(d, lista);
                     break;
                 case Distribucion.Poisson:
                     d = "Poisson";
+                    bondad = new PruebaBondad(d, lista, double.Parse(txtLambdaPoisson.Text));
                     break;
                 default:
                     break;
             }
-            PruebaBondad bondad = new PruebaBondad(d,lista);
-            bondad.ShowDialog();
+            if (bondad != null)
+            {
+                bondad.ShowDialog();
+            }
+            
         }
     }
 }

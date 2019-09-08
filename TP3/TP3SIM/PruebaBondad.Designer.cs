@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtInter = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblDist = new System.Windows.Forms.Label();
@@ -42,6 +41,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtInter = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -63,13 +63,6 @@
             this.label1.Size = new System.Drawing.Size(226, 25);
             this.label1.TabIndex = 1;
             this.label1.Text = "Prueba de Chi-cuadrado";
-            // 
-            // txtInter
-            // 
-            this.txtInter.Location = new System.Drawing.Point(104, 43);
-            this.txtInter.Name = "txtInter";
-            this.txtInter.Size = new System.Drawing.Size(100, 20);
-            this.txtInter.TabIndex = 2;
             // 
             // label2
             // 
@@ -123,6 +116,7 @@
             // 
             // txtTabulado
             // 
+            this.txtTabulado.Enabled = false;
             this.txtTabulado.Location = new System.Drawing.Point(398, 80);
             this.txtTabulado.Name = "txtTabulado";
             this.txtTabulado.Size = new System.Drawing.Size(100, 20);
@@ -130,6 +124,7 @@
             // 
             // txtAcum
             // 
+            this.txtAcum.Enabled = false;
             this.txtAcum.Location = new System.Drawing.Point(398, 43);
             this.txtAcum.Name = "txtAcum";
             this.txtAcum.Size = new System.Drawing.Size(100, 20);
@@ -174,11 +169,21 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Nivel de confianza=95%";
             // 
+            // txtInter
+            // 
+            this.txtInter.Location = new System.Drawing.Point(105, 46);
+            this.txtInter.Mask = "00000";
+            this.txtInter.Name = "txtInter";
+            this.txtInter.Size = new System.Drawing.Size(100, 20);
+            this.txtInter.TabIndex = 15;
+            this.txtInter.ValidatingType = typeof(int);
+            // 
             // PruebaBondad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 210);
+            this.Controls.Add(this.txtInter);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.label6);
@@ -190,7 +195,6 @@
             this.Controls.Add(this.lblDist);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtInter);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "PruebaBondad";
@@ -204,7 +208,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtInter;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblDist;
@@ -216,5 +219,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.MaskedTextBox txtInter;
     }
 }

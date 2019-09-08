@@ -15,12 +15,20 @@ namespace TP3SIM
     public partial class PruebaBondad : Form
     {
         List<double> Valores;
+        double _lambda;
         
         public PruebaBondad(string dist, List<double> lista)
         {
             InitializeComponent();
             lblDist.Text = dist;
             Valores = lista;
+        }
+        public PruebaBondad(string dist, List<double> lista, double lambda)
+        {
+            InitializeComponent();
+            lblDist.Text = dist;
+            Valores = lista;
+            _lambda = lambda;
         }
         public List<int> Seccionar()
         { 
@@ -37,26 +45,7 @@ namespace TP3SIM
             }
             return array;
         }
-        private double CalcularSD(List<int> lista, double mean)
-        {
-            double sd = 0;
-            for (int i = 0; i < lista.Count(); i++)
-            {
-                sd = Math.Pow(lista[i] + mean, 2);
-            }
-            sd = Math.Sqrt(sd / lista.Count());
-            return sd;
-        }
-        private double CalcularMedia(List<int> lista)
-        {
-            double media = 0;
-            for (int i = 0; i <= lista.Count(); i++)
-            {
-                media = media+ lista[i];
-            }
-            var mean = double.Parse((media / lista.Count()).ToString());
-            return mean;
-        }
+
         private void GenerarUni()
         {
             var observados = Seccionar();
@@ -90,8 +79,6 @@ namespace TP3SIM
             var paso = (max - min) / intervalos;
             var mean = ArrayStatistics.Mean(Valores.ToArray());
             var desEst=ArrayStatistics.StandardDeviation(Valores.ToArray());
-            //var mean = CalcularMedia(observados);
-            //var desEst = CalcularSD(observados,mean);
             for (double i =min; i <= max; i+=paso)
             {
                 var sup = MathNet.Numerics.Distributions.Normal.CDF(mean, desEst, i + paso);
@@ -145,10 +132,13 @@ namespace TP3SIM
             var min = Valores.Min();
             var max = Valores.Max();
             var paso = (max - min) / intervalos;
-            var lambda = ArrayStatistics.Mean(array);
+            var lambda = _lambda;
             for (double i = min; i <= max; i += paso)
-            {
-                double esperado = Valores.Count()*(MathNet.Numerics.Distributions.Poisson.CDF(lambda, i + paso) - MathNet.Numerics.Distributions.Exponential.CDF(lambda, i));
+            { var sup = MathNet.Numerics.Distributions.Poisson.CDF(lambda, i + paso);
+                var inf = MathNet.Numerics.Distributions.Poisson.CDF(lambda, i);                
+                var cantValores = Valores.Where(x => x >= i && x < i + paso).Count();
+                var relativa = cantValores / Valores.Count();
+                double esperado = Valores.Count()*( inf);//relativa * ( sup-inf );
                 frecAbs.Add(esperado);
             }
             for (int i = 0; i < intervalos; i++)
