@@ -301,7 +301,7 @@ namespace TP3SIM
                 MessageBox.Show("No hay valores para generar la pruba de bondad", "Advertencia");
                 return;
             }
-            var d = "";
+            string d;
             var lista = new List<double>();
             foreach (var elemento in lstValores.Items)
             {
@@ -321,7 +321,7 @@ namespace TP3SIM
                     break;
                 case Distribucion.ExponencialNegativa:
                     d = "ExponencialNegativa";
-                    bondad = new PruebaBondad(d, lista);
+                    bondad = new PruebaBondad(d, lista, double.Parse(txtLambdaExp.Text));
                     break;
                 case Distribucion.Poisson:
                     d = "Poisson";

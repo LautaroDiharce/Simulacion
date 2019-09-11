@@ -76,12 +76,14 @@ namespace TP3SIM
         {
             var euler = Math.E;
             double acum = 0;
+            double valor;
             var poisson = new List<double>();
             for (int x = 0; acum < 0.999; x++)
             {
-                poisson.Add(Math.Round(acum, 3));
-                var valor = Math.Pow(lambda, x) * Math.Pow(euler, (-1) * lambda) / Factorial(x);
+
+                valor = Math.Pow(lambda, x) * Math.Pow(euler, (-1) * lambda) / Factorial(x);
                 acum = valor + acum;
+                poisson.Add(Math.Round(acum, 3));
             }
             return poisson;
         }

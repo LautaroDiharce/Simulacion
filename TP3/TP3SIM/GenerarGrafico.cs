@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using MathNet.Numerics.Statistics;
+using MathNet.Numerics;
 
 namespace TP3SIM
 {
@@ -47,50 +49,41 @@ namespace TP3SIM
         {
 
 
-                List<double> ejeX = new List<double>();
+            List<double> ejeX = new List<double>();
 
-                List<int> ejey = new List<int>();
-                var valorMinimo = Valores.Min();
-                var valorMaximo = Valores.Max();
-                var paso = (valorMaximo - valorMinimo) / cantPasos;
-
-
-                for (double i = valorMinimo; i < valorMaximo; i += paso)
-                {
-
-                    var valoresEnRango = Valores.Where(x => x >= i && x < (i + paso)).ToList();
-                    ejey.Add(valoresEnRango.Count);
-                    ejeX.Add(i);
+            List<int> ejey = new List<int>();
+            var valorMinimo = Valores.Min();
+            var valorMaximo = Valores.Max();
+            var paso = (valorMaximo - valorMinimo) / cantPasos;
 
 
-                }
-                var chart = grafico.ChartAreas[0];
-                chart.AxisX.IntervalType = DateTimeIntervalType.Number;
-                chart.AxisX.LabelStyle.Format = "";
-                chart.AxisY.LabelStyle.Format = "";
-                chart.AxisY.LabelStyle.IsEndLabelVisible = true;
-                chart.AxisX.Minimum = ejeX.Min() - paso;
-                chart.AxisX.Maximum = ejeX.Max() + paso;
-                chart.AxisY.Minimum = 0;
-                chart.AxisY.Maximum = ejey.Max() + 2;
-                chart.AxisX.Interval = Math.Round(paso, 3);
-                chart.AxisY.Interval = 1;
-                grafico.Series["Numeros"].ChartType = SeriesChartType.Column;
+            for (double i = valorMinimo; i < valorMaximo; i += paso)
+            {
 
-                for (int i = 0; i < ejeX.Count; i++)
-                {
-                    grafico.Series["Numeros"].Points.AddXY(Math.Round(ejeX[i] + (paso / 2), 3), ejey[i]);
-                }
-            
-            /* var valorMinimo = Valores.Min();
-             var valorMaximo = Valores.Max();
-             var paso = (valorMaximo - valorMinimo) / cantPasos;            
+                var valoresEnRango = Valores.Where(x => x >= i && x < (i + paso)).ToList();
+                ejey.Add(valoresEnRango.Count);
+                ejeX.Add(i + (paso / 2));
 
-             for (double i = valorMinimo; i < valorMaximo; i+=paso)
-             {
-                 var valoresEnRango = Valores.Where(x => x >= i && x < (i + paso)).ToList();
-                 grafico.Series["Serie1"].Points.AddXY(i, valoresEnRango.Count);
-             }            */
+
+            }
+            var chart = grafico.ChartAreas[0];
+            chart.AxisX.IntervalType = DateTimeIntervalType.Number;
+            chart.AxisX.LabelStyle.Format = "";
+            chart.AxisY.LabelStyle.Format = "";
+            chart.AxisY.LabelStyle.IsEndLabelVisible = true;
+            chart.AxisX.Minimum = Math.Round(ejeX.Min() - paso, 3);
+            chart.AxisX.Maximum = Math.Round(ejeX.Max() + paso, 3);
+            chart.AxisY.Minimum = 0;
+            chart.AxisY.Maximum = ejey.Max() + 2;
+            chart.AxisX.Interval = Math.Round(paso, 3);
+            chart.AxisY.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            //chart.AxisY.Interval = 1;
+            grafico.Series["Serie1"].ChartType = SeriesChartType.RangeColumn;
+
+            for (int i = 0; i < ejeX.Count; i++)
+            {
+                grafico.Series["Serie1"].Points.AddXY(Math.Round(ejeX[i], 3), ejey[i]);
+            }
         }
         private void Limpiar()
         {

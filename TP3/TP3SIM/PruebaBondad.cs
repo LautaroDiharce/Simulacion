@@ -16,7 +16,7 @@ namespace TP3SIM
     {
         List<double> Valores;
         double _lambda;
-        
+        double alpha = 0.95;
         public PruebaBondad(string dist, List<double> lista)
         {
             InitializeComponent();
@@ -33,17 +33,32 @@ namespace TP3SIM
         public List<int> Seccionar()
         { 
             var intervalos = int.Parse(txtInter.Text);
-            var array = new List<int>();
+            var lista = new List<int>();
             var valorMinimo = Valores.Min();
             var valorMaximo = Valores.Max();
             var paso = (valorMaximo - valorMinimo) / intervalos;
 
-            for (double i = valorMinimo; i <=valorMaximo; i += paso)
+            for (double i = valorMinimo; i <valorMaximo; i += paso)
             {
                 var valoresEnRango = Valores.Where(x => x >= i && x < (i + paso)).ToList();
-                array.Add(valoresEnRango.Count());
+                lista.Add(valoresEnRango.Count());
             }
-            return array;
+            return lista;
+        }
+        public List<int> SeccionarPoi()
+        {
+            var intervalos = int.Parse(txtInter.Text);
+            var lista = new List<int>();
+            var valorMinimo =Convert.ToInt32( Valores.Min());
+            var valorMaximo = Convert.ToInt32(Valores.Max());
+            var paso = Convert.ToInt32((valorMaximo - valorMinimo) / intervalos);
+
+            for (int i = 0; i <= valorMaximo; i += paso)
+            {
+                var valoresEnRango = Valores.Where(x => x >= i && x < (i + paso)).ToList();
+                lista.Add(valoresEnRango.Count());
+            }
+            return lista;
         }
 
         private void GenerarUni()
@@ -64,7 +79,6 @@ namespace TP3SIM
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos-1-2;
-            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl,alpha);
             txtTabulado.Text = chi.ToString();       
         }
@@ -92,21 +106,20 @@ namespace TP3SIM
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos - 1 - 2;
-            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl, alpha);
             txtTabulado.Text = chi.ToString();
         }
         private void GenerarEN()
         {
             var observados = Seccionar();
-            var array = Valores.ToArray();
+
             double acumulador = 0;
             var frecAbs = new List<double>();
             var intervalos = int.Parse(txtInter.Text);
             var min = Valores.Min();
             var max = Valores.Max();
             var paso = (max - min) / intervalos;
-            var lambda = 1/ArrayStatistics.Mean(array);
+            var lambda =_lambda;
             for (double i = min; i <= max; i += paso)
             {
                 double esperado = (MathNet.Numerics.Distributions.Exponential.CDF(lambda, i + paso) - MathNet.Numerics.Distributions.Exponential.CDF(lambda, i))*Valores.Count();
@@ -118,36 +131,30 @@ namespace TP3SIM
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos - 1 - 1;
-            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl, alpha);
             txtTabulado.Text = chi.ToString();
         }
         private void GenerarPoi()
         {
-            var observados = Seccionar();
-            var array = Valores.ToArray();
+            var observados = SeccionarPoi();
             double acumulador = 0;
-            var frecAbs = new List<double>();
+            var frecEsp = new List<double>();
             var intervalos = int.Parse(txtInter.Text);
-            var min = Valores.Min();
-            var max = Valores.Max();
-            var paso = (max - min) / intervalos;
             var lambda = _lambda;
-            for (double i = min; i <= max; i += paso)
-            { var sup = MathNet.Numerics.Distributions.Poisson.CDF(lambda, i + paso);
-                var inf = MathNet.Numerics.Distributions.Poisson.CDF(lambda, i);                
-                var cantValores = Valores.Where(x => x >= i && x < i + paso).Count();
-                var relativa = cantValores / Valores.Count();
-                double esperado = Valores.Count()*( inf);//relativa * ( sup-inf );
-                frecAbs.Add(esperado);
+            for (int i = 0; i < intervalos; i++)
+            {
+                var mass = MathNet.Numerics.Distributions.Poisson.PMF(lambda, i);
+                double esperado = Valores.Count() * mass;
+
+                frecEsp.Add(esperado);
             }
             for (int i = 0; i < intervalos; i++)
             {
-                acumulador = acumulador + Math.Pow((observados[i] - frecAbs[i]), 2) / frecAbs[i];
+                var resta = observados[i] - frecEsp[i];
+                acumulador = acumulador + Math.Pow(resta, 2) / frecEsp[i];
             }
             txtAcum.Text = acumulador.ToString();
             var gl = intervalos - 1 - 1;
-            var alpha = 0.95;
             var chi = MathNet.Numerics.Distributions.ChiSquared.InvCDF(gl, alpha);
             txtTabulado.Text = chi.ToString();
         }
@@ -166,28 +173,38 @@ namespace TP3SIM
         }
         private void BtnProbar_Click(object sender, EventArgs e)
         {
-            var distribucion = lblDist.Text;
-            switch (distribucion)
+            if (txtInter.Text =="")
             {
-                case "Uniforme":
-                    GenerarUni();
-                    CalcularResultado();
-                    break;
-                case "Normal":
-                     GenerarNorm();
-                     CalcularResultado();
-                     break;
-                 case "ExponencialNegativa":
-                     GenerarEN();
-                     CalcularResultado();
-                     break;
-                 case "Poisson":
-                     GenerarPoi();
-                     CalcularResultado();
-                     break;
-                default:
-                    break;
+                MessageBox.Show("Por Favor ingrese un numero de intervalos");
+                txtInter.Focus();
+                return;
             }
+            else
+            {
+                var distribucion = lblDist.Text;
+                switch (distribucion)
+                {
+                    case "Uniforme":
+                        GenerarUni();
+                        CalcularResultado();
+                        break;
+                    case "Normal":
+                        GenerarNorm();
+                        CalcularResultado();
+                        break;
+                    case "ExponencialNegativa":
+                        GenerarEN();
+                        CalcularResultado();
+                        break;
+                    case "Poisson":
+                        GenerarPoi();
+                        CalcularResultado();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
         }
     }
 }
