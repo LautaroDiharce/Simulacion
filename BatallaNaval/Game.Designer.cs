@@ -45,6 +45,8 @@
             this.lblAciertosA = new System.Windows.Forms.Label();
             this.lblCantTirosA = new System.Windows.Forms.Label();
             this.lblEstrategiaA = new System.Windows.Forms.Label();
+            this.lblGanadorA = new System.Windows.Forms.Label();
+            this.lblGanadorB = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnUbicarBarcos
@@ -78,7 +80,7 @@
             this.btnLimpiarBarcos.Name = "btnLimpiarBarcos";
             this.btnLimpiarBarcos.Size = new System.Drawing.Size(215, 53);
             this.btnLimpiarBarcos.TabIndex = 2;
-            this.btnLimpiarBarcos.Text = "Limpiar barcos";
+            this.btnLimpiarBarcos.Text = "Limpiar tableros";
             this.btnLimpiarBarcos.UseVisualStyleBackColor = true;
             this.btnLimpiarBarcos.Click += new System.EventHandler(this.BtnLimpiarBarcos_Click);
             // 
@@ -218,11 +220,37 @@
             this.lblEstrategiaA.TabIndex = 14;
             this.lblEstrategiaA.Text = "Random";
             // 
+            // lblGanadorA
+            // 
+            this.lblGanadorA.AutoSize = true;
+            this.lblGanadorA.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGanadorA.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblGanadorA.Location = new System.Drawing.Point(303, 6);
+            this.lblGanadorA.Name = "lblGanadorA";
+            this.lblGanadorA.Size = new System.Drawing.Size(121, 32);
+            this.lblGanadorA.TabIndex = 17;
+            this.lblGanadorA.Text = "Ganador!";
+            this.lblGanadorA.Visible = false;
+            // 
+            // lblGanadorB
+            // 
+            this.lblGanadorB.AutoSize = true;
+            this.lblGanadorB.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGanadorB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblGanadorB.Location = new System.Drawing.Point(1241, 6);
+            this.lblGanadorB.Name = "lblGanadorB";
+            this.lblGanadorB.Size = new System.Drawing.Size(121, 32);
+            this.lblGanadorB.TabIndex = 18;
+            this.lblGanadorB.Text = "Ganador!";
+            this.lblGanadorB.Visible = false;
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Controls.Add(this.lblGanadorB);
+            this.Controls.Add(this.lblGanadorA);
             this.Controls.Add(this.lblAciertosA);
             this.Controls.Add(this.lblCantTirosA);
             this.Controls.Add(this.lblEstrategiaA);
@@ -266,5 +294,7 @@
         private System.Windows.Forms.Label lblAciertosA;
         private System.Windows.Forms.Label lblCantTirosA;
         private System.Windows.Forms.Label lblEstrategiaA;
+        private System.Windows.Forms.Label lblGanadorA;
+        private System.Windows.Forms.Label lblGanadorB;
     }
 }

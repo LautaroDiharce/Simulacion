@@ -10,199 +10,510 @@ namespace BatallaNaval
 {
     public class Estrategia
     {
-        public int aciertos { get; set; }
-        public int cantTiros { get; set; }
+        public int aciertosJugador1 { get; set; }
+        public int aciertosJugador2 { get; set; }
+        public int cantTirosJugador1 { get; set; }
+        public int cantTirosJugador2 { get; set; }
         public double proporcionAciertos { get; set; }
 
-        Panel[,] adversario;
+        Panel[,] tableroJug1;
+        Panel[,] tableroJug2;
         Color colorJugador;
-        DireccionDeCaza direccion;
-        public Estrategia(Panel[,] _adversario, Color _colorJugador)
+        Random random = new Random();
+        List<Pares> paresJugador1 = new List<Pares>();
+        List<Pares> paresJugador2 = new List<Pares>();
+        Pares parDeCaza = null;
+        bool cazarArriba = false;
+        bool cazarAbajo = false;
+        bool cazarIzquierda = false;
+        bool cazarDerecha = false;
+
+        bool tiroArriba = false;
+        bool tiroDerecha = false;
+        bool tiroAbajo = false;
+        bool tiroIzquierda = false;
+        public Estrategia(Panel[,] _tableroJug1, Panel[,] _tableroJug2)
         {
-            adversario = _adversario;
-            colorJugador = _colorJugador;
+            tableroJug1 = _tableroJug1;
+            tableroJug2 = _tableroJug2;
+            CargarPares();
         }
 
-        public async void Caza()
+        private void CargarPares()
         {
-            Random random = new Random();
-            aciertos = 0;
-            cantTiros = 0;
-
-            while (aciertos < 40)
+            for (int i = 0; i < 50; i++)
             {
-                var X = random.Next(0, 49);
-                var Y = random.Next(0, 49);
-
-                if (adversario[X, Y].BackColor == Color.Red)
+                for (int j = 0; j < 50; j++)
                 {
-                    switch (IdentificarDireccion(X, Y))
-                    {
-                        case DireccionDeCaza.Arriba:
-                            aciertos += CazarArriba(X, Y);
-                            break;
-                        case DireccionDeCaza.Abajo:
-                            aciertos += CazarAbajo(X, Y);
-                            break;
-                        case DireccionDeCaza.Derecha:
-                            aciertos += CazarDerecha(X, Y);
-                            break;
-                        case DireccionDeCaza.Izquierda:
-                            aciertos += CazarIzquierda(X, Y);
-                            break;
-                        default:
-                            break;
-                    }
+                    Pares par = new Pares(i, j);
+                    paresJugador1.Add(par);
+                    paresJugador2.Add(par);
+                }
+            }
+        }
+
+        private void Jugar()
+        {
+            while (aciertosJugador1 < 40 && aciertosJugador2 < 40)
+            {
+                //Primero tira el jugador 1 
+                TiroRandom();
+
+                //Si no llego al total de aciertos necesarios, tira el jugador 2
+                if (aciertosJugador1 < 40)
+                {
+                    TiroCaza();
+                }
+            }
+        }
+
+        //El jugador 2 le tira a los pares del jugador 1
+        public void TiroCaza()
+        {
+            if (parDeCaza == null)
+            {
+                var rand = random.Next(0, paresJugador1.Count);
+
+                var par = paresJugador1[rand];
+
+                if (tableroJug1[par.X, par.Y].BackColor == Color.DarkGray || tableroJug1[par.X, par.Y].BackColor == Color.White)
+                {
+                    tableroJug1[par.X, par.Y].BackColor = Color.Blue;
+                    cantTirosJugador2++;
+                    paresJugador1.RemoveAt(rand);
+                    return;
+                }
+                else if (tableroJug1[par.X, par.Y].BackColor == Color.Red)
+                {
+                    //Pintamos, contamos 1 tiro y almacenamos el par para tenerlo en cuenta en el tiro siguiente;
+                    tableroJug1[par.X, par.Y].BackColor = Color.Orange;
+                    parDeCaza = par;
+                    cantTirosJugador2++;
+                    aciertosJugador2++;
+                    return;
+                }
+            }
+            else
+            {
+                //En esta logica se hace un tiro en cada direccion. Al hacer el tiro se determina si es correcta y se empieza la caza en esa direccion, de lo contrario se intenta con otra.
+                if (!tiroArriba)
+                {
+                    TirarArriba();
+                    return;
+                }
+                else if (cazarArriba)
+                {
+                    CazarHaciaArriba();
+                    return;
+                }
+
+                if (!tiroDerecha)
+                {
+                    TirarDerecha();
+                    return;
+                }
+                else if (cazarDerecha)
+                {
+                    CazarHaciaDerecha();
+                    return;
+                }
+
+                if (!tiroAbajo)
+                {
+                    TirarAbajo();
+                    return;
+                }
+                else if (cazarAbajo)
+                {
+                    CazarHaciaAbajo();
+                    return;
+                }
+
+                if (!tiroIzquierda)
+                {
+                    TirarIzquierda();
+                    return;
+                }
+                else if (cazarIzquierda)
+                {
+                    CazarHaciaIzquierda();
+                    return;
+                }
+
+                parDeCaza = null;
+                ResetearIndicadores();
+                TiroCaza();
+            }
+        }
+
+        private void ResetearIndicadores()
+        {
+            cazarArriba = false;
+            cazarAbajo = false;
+            cazarIzquierda = false;
+            cazarDerecha = false;
+
+            tiroArriba = false;
+            tiroDerecha = false;
+            tiroAbajo = false;
+            tiroIzquierda = false;
+        }
+
+        private void TirarArriba()
+        {
+            Pares parDeArriba = new Pares(parDeCaza.X, parDeCaza.Y + 1);
+            if (paresJugador1.Contains(parDeArriba))
+            {
+                if (tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor == Color.DarkGray || tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor == Color.White)
+                {
+                    tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parDeArriba);
+                    tiroArriba = true;
+                    cantTirosJugador2++;
+                }
+                else if (tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor == Color.Red)
+                {
+                    tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza porque ya determinamos que vamos a ir hacia arriba
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parDeArriba;
+                    cazarArriba = true;
+                    tiroArriba = true;
+                    cantTirosJugador2++;
                 }
                 else
                 {
-                    cantTiros++;
+                    //No se cuenta este tiro porque ya fue marcado
+                    tiroArriba = true;
+                    TiroCaza();
                 }
+            }
+            else
+            {
+                //No se cuenta este tiro porque esta fuera del tablero
+                tiroArriba = true;
+                TiroCaza();
             }
         }
 
-        private int CazarArriba(int X, int Y)
+        private void CazarHaciaArriba()
         {
-            var YArriba = Y;
-            int cantAciertos = 0;
-            //Se hace para asegurarnos que no se haya salido del tablero
-            bool estaDentroDelTablero = true;
-            while(estaDentroDelTablero)
+            Pares parDeArriba = new Pares(parDeCaza.X, parDeCaza.Y + 1);
+            if (paresJugador1.Contains(parDeArriba))
             {
-                if (adversario[X, YArriba].BackColor == Color.Red)
+                if (tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor == Color.DarkGray || tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor == Color.White)
                 {
-                    YArriba++;
-                    cantAciertos++;
-                    //Se verifica que el siguiente valor este dentro del rango
-                    estaDentroDelTablero = YArriba < adversario.GetLength(0);
+                    //Este escenario implica que se completo el barco
+                    tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parDeArriba);
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    cantTirosJugador2++;
                 }
-
-                adversario[X, YArriba].BackColor = colorJugador;
-                cantTiros++;
-            }
-            return cantAciertos;
-        }
-
-        private int CazarAbajo(int X, int Y)
-        {
-            var YAbajo = Y;
-            int cantAciertos = 0;
-            //Se hace para asegurarnos que no se haya salido del tablero
-            bool estaDentroDelTablero = true;
-            while (estaDentroDelTablero)
-            {
-                if (adversario[X, YAbajo].BackColor == Color.Red)
+                else if (tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor == Color.Red)
                 {
-                    YAbajo--;
-                    cantAciertos++;
-                    estaDentroDelTablero = YAbajo >= 0;
+                    tableroJug1[parDeArriba.X, parDeArriba.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza y lo cambiamos por el nuevo par que marcamos
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parDeArriba;
+                    cantTirosJugador2++;
                 }
-
-                adversario[X, YAbajo].BackColor = colorJugador;
-                cantTiros++;
-            }
-            return cantAciertos;
-        }
-
-        private int CazarIzquierda(int X, int Y)
-        {
-            var XIzq = X;
-            int cantAciertos = 0;
-            //Se hace para asegurarnos que no se haya salido del tablero
-            bool estaDentroDelTablero = true;
-            while (estaDentroDelTablero)
-            {
-                if (adversario[XIzq, Y].BackColor == Color.Red)
+                else
                 {
-                    XIzq--;
-                    cantAciertos++;
-                    estaDentroDelTablero = XIzq >= 0;
+                    //En esta instancia estaba cazando y el limite del barco estaba en el limite del tablero, se concluye la caza
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    TiroCaza();
                 }
-
-                adversario[XIzq, Y].BackColor = colorJugador;
-                cantTiros++;
             }
-            return cantAciertos;
+            else
+            {
+                //En esta instancia estaba cazando y el limite del barco estaba en el limite del tablero, se concluye la caza
+                paresJugador1.Remove(parDeCaza);
+                //parDeCaza se setea null para que vuelva a tiar random
+                parDeCaza = null;
+                //Se resetean los indicadores de la caza
+                ResetearIndicadores();
+                TiroCaza();
+            }
         }
 
-        private int CazarDerecha(int X, int Y)
+        private void TirarDerecha()
         {
-            var XDer = X;
-            int cantAciertos = 0;
-            //Se hace para asegurarnos que no se haya salido del tablero
-            bool estaDentroDelTablero = true;
-            while (estaDentroDelTablero)
+            Pares parDerecho = new Pares(parDeCaza.X + 1, parDeCaza.Y);
+            if (paresJugador1.Contains(parDerecho))
             {
-                if (adversario[XDer, Y].BackColor == Color.Red)
+                if (tableroJug1[parDerecho.X, parDerecho.Y].BackColor == Color.DarkGray || tableroJug1[parDerecho.X, parDerecho.Y].BackColor == Color.White)
                 {
-                    XDer++;
-                    cantAciertos++;
-                    estaDentroDelTablero = XDer < adversario.GetLength(1);
+                    tableroJug1[parDerecho.X, parDerecho.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parDerecho);
+                    tiroDerecha = true;
+                    cantTirosJugador2++;
                 }
-
-                adversario[XDer, Y].BackColor = colorJugador;
-                cantTiros++;
-            }
-            return cantAciertos;
-        }
-
-        private DireccionDeCaza? IdentificarDireccion(int XInicial, int YInicial)
-        {
-            var XDer = XInicial + 1;
-            var XIzq = XInicial - 1;
-            var YArr = YInicial + 1;
-            var YAba = YInicial - 1;
-
-            if (adversario[XDer, YInicial].BackColor == Color.Red)
-            {
-                return DireccionDeCaza.Derecha;
-            }
-
-            if (adversario[XIzq, YInicial].BackColor == Color.Red)
-            {
-                return DireccionDeCaza.Izquierda;
-            }
-
-            if (adversario[XInicial, YArr].BackColor == Color.Red)
-            {
-                return DireccionDeCaza.Arriba;
-            }
-
-            if (adversario[XInicial, YAba].BackColor == Color.Red)
-            {
-                return DireccionDeCaza.Abajo;
-            }
-
-            return null;
-        }
-
-        public async void Random()
-        {
-            Random random = new Random();
-            aciertos = 0;
-            cantTiros = 0;
-
-            while (aciertos < 40)
-            {
-                var X = random.Next(0, 50);
-                var Y = random.Next(0, 50);
-
-                if (adversario[X, Y].BackColor == Color.Red)
+                else if (tableroJug1[parDerecho.X, parDerecho.Y].BackColor == Color.Red)
                 {
-                    aciertos++;
+                    tableroJug1[parDerecho.X, parDerecho.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza porque ya determinamos que vamos a ir hacia la derecha
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parDerecho;
+                    cazarDerecha = true;
+                    tiroDerecha = true;
+                    cantTirosJugador2++;
                 }
-
-                adversario[X, Y].BackColor = colorJugador;
-                cantTiros++;
+                else
+                {
+                    tiroDerecha = true;
+                    TiroCaza();
+                }
+            }
+            else
+            {
+                tiroDerecha = true;
+                TiroCaza();
             }
         }
 
-        enum DireccionDeCaza
+        private void CazarHaciaDerecha()
         {
-            Arriba,
-            Abajo,
-            Izquierda,
-            Derecha
+            Pares parDerecho = new Pares(parDeCaza.X + 1, parDeCaza.Y);
+            if (paresJugador1.Contains(parDerecho))
+            {
+                if (tableroJug1[parDerecho.X, parDerecho.Y].BackColor == Color.DarkGray || tableroJug1[parDerecho.X, parDerecho.Y].BackColor == Color.White)
+                {
+                    //Este escenario implica que se completo el barco
+                    tableroJug1[parDerecho.X, parDerecho.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parDerecho);
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    cantTirosJugador2++;
+                }
+                else if (tableroJug1[parDerecho.X, parDerecho.Y].BackColor == Color.Red)
+                {
+                    tableroJug1[parDerecho.X, parDerecho.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza y lo cambiamos por el nuevo par que marcamos
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parDerecho;
+                    cantTirosJugador2++;
+                }
+                else
+                {
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    TiroCaza();
+                }
+            }
+            else
+            {
+                paresJugador1.Remove(parDeCaza);
+                //parDeCaza se setea null para que vuelva a tiar random
+                parDeCaza = null;
+                //Se resetean los indicadores de la caza
+                ResetearIndicadores();
+                TiroCaza();
+            }
         }
+
+        private void TirarAbajo()
+        {
+            Pares parAbajo = new Pares(parDeCaza.X, parDeCaza.Y - 1);
+            if (paresJugador1.Contains(parAbajo))
+            {
+                if (tableroJug1[parAbajo.X, parAbajo.Y].BackColor == Color.DarkGray || tableroJug1[parAbajo.X, parAbajo.Y].BackColor == Color.White)
+                {
+                    tableroJug1[parAbajo.X, parAbajo.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parAbajo);
+                    tiroAbajo = true;
+                    cantTirosJugador2++;
+                }
+                else if (tableroJug1[parAbajo.X, parAbajo.Y].BackColor == Color.Red)
+                {
+                    tableroJug1[parAbajo.X, parAbajo.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza porque ya determinamos que vamos a ir hacia abajo
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parAbajo;
+                    cazarAbajo = true;
+                    tiroAbajo = true;
+                    cantTirosJugador2++;
+                }
+                else
+                {
+                    tiroAbajo = true;
+                    TiroCaza();
+                }
+            }
+            else
+            {
+                tiroAbajo = true;
+                TiroCaza();
+            }
+        }
+
+        private void CazarHaciaAbajo()
+        {
+            Pares parAbajo = new Pares(parDeCaza.X, parDeCaza.Y -1);
+            if (paresJugador1.Contains(parAbajo))
+            {
+                if (tableroJug1[parAbajo.X, parAbajo.Y].BackColor == Color.DarkGray || tableroJug1[parAbajo.X, parAbajo.Y].BackColor == Color.White)
+                {
+                    //Este escenario implica que se completo el barco
+                    tableroJug1[parAbajo.X, parAbajo.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parAbajo);
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    cantTirosJugador2++;
+                }
+                else if (tableroJug1[parAbajo.X, parAbajo.Y].BackColor == Color.Red)
+                {
+                    tableroJug1[parAbajo.X, parAbajo.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza y lo cambiamos por el nuevo par que marcamos
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parAbajo;
+                    cantTirosJugador2++;
+                }
+                else
+                {
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    TiroCaza();
+                }
+            }
+            else
+            {
+                paresJugador1.Remove(parDeCaza);
+                //parDeCaza se setea null para que vuelva a tiar random
+                parDeCaza = null;
+                //Se resetean los indicadores de la caza
+                ResetearIndicadores();
+                TiroCaza();
+            }
+        }
+
+        private void TirarIzquierda()
+        {
+            Pares parIzquierda = new Pares(parDeCaza.X - 1, parDeCaza.Y);
+            if (paresJugador1.Contains(parIzquierda))
+            {
+                if (tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor == Color.DarkGray || tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor == Color.White)
+                {
+                    tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parIzquierda);
+                    tiroIzquierda = true;
+                    cantTirosJugador2++;
+                }
+                else if (tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor == Color.Red)
+                {
+                    tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza porque ya determinamos que vamos a ir hacia la izquierda
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parIzquierda;
+                    cazarIzquierda = true;
+                    tiroIzquierda = true;
+                    cantTirosJugador2++;
+                }
+                else
+                {
+                    tiroIzquierda = true;
+                    TiroCaza();
+                }
+            }
+            else
+            {
+                tiroIzquierda = true;
+                TiroCaza();
+            }
+        }
+
+        private void CazarHaciaIzquierda()
+        {
+            Pares parIzquierda = new Pares(parDeCaza.X - 1, parDeCaza.Y);
+            if (paresJugador1.Contains(parIzquierda))
+            {
+                if (tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor == Color.DarkGray || tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor == Color.White)
+                {
+                    //Este escenario implica que se completo el barco
+                    tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor = Color.Blue;
+                    paresJugador1.Remove(parIzquierda);
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    cantTirosJugador2++;
+                }
+                else if (tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor == Color.Red)
+                {
+                    tableroJug1[parIzquierda.X, parIzquierda.Y].BackColor = Color.Orange;
+                    aciertosJugador2++;
+                    //Eliminamos el par de caza y lo cambiamos por el nuevo par que marcamos
+                    paresJugador1.Remove(parDeCaza);
+                    parDeCaza = parIzquierda;
+                    cantTirosJugador2++;
+                }
+                else
+                {
+                    paresJugador1.Remove(parDeCaza);
+                    //parDeCaza se setea null para que vuelva a tiar random
+                    parDeCaza = null;
+                    //Se resetean los indicadores de la caza
+                    ResetearIndicadores();
+                    TiroCaza();
+                }
+            }
+            else
+            {
+                paresJugador1.Remove(parDeCaza);
+                //parDeCaza se setea null para que vuelva a tiar random
+                parDeCaza = null;
+                //Se resetean los indicadores de la caza
+                ResetearIndicadores();
+                TiroCaza();
+            }
+        }
+
+        //El jugador 1 le tira a los pares del jugador 2
+        public void TiroRandom()
+        {
+            var rand = random.Next(0, paresJugador2.Count);
+
+            var par = paresJugador2[rand];
+            paresJugador2.RemoveAt(rand);
+            cantTirosJugador1++;
+
+            if (tableroJug2[par.X, par.Y].BackColor == Color.DarkGray || tableroJug2[par.X, par.Y].BackColor == Color.White)
+            {
+                tableroJug2[par.X, par.Y].BackColor = Color.Green;
+            }
+            else if (tableroJug2[par.X, par.Y].BackColor == Color.Red)
+            {
+                tableroJug2[par.X, par.Y].BackColor = Color.Orange;
+                aciertosJugador1++;
+            }
+        }
+
     }
 }
