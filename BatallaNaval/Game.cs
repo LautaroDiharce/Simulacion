@@ -16,12 +16,11 @@ namespace BatallaNaval
         private Panel[,] tableroA;
         private Panel[,] tableroB;
 
-        Random random;
+        Random random = new Random();
         public Game()
         {
             InitializeComponent();
             CargarPaneles();
-            random = new Random();
         }
 
         private void CargarPaneles()
@@ -185,75 +184,103 @@ namespace BatallaNaval
             switch (direccion)
             {
                 //Arriba
-                case 0:
-                    for (int i = 0; i < cantPosiciones; i++)
+                case 1:
+                    if ((Y + cantPosiciones) >= 50)
                     {
-                        if (YFinal < 50)
+                        return false;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                            if (YFinal < 50)
+                            {
+                                if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                                {
+                                    return false;
+                                }
+                            }
+                            else
                             {
                                 return false;
                             }
+                            YFinal++;
                         }
-                        else
-                        {
-                            return false;
-                        }
-                        YFinal++;
                     }
                     break;
                 //Derecha
-                case 1:
-                    for (int i = 0; i < cantPosiciones; i++)
+                case 2:
+                    if ((X + cantPosiciones) >= 50)
                     {
-                        if (XFinal < 50)
+                        return false;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                            if (XFinal < 50)
+                            {
+                                if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                                {
+                                    return false;
+                                }
+                            }
+                            else
                             {
                                 return false;
                             }
+                            XFinal++;
                         }
-                        else
-                        {
-                            return false;
-                        }
-                        XFinal++;
                     }
                     break;
                 //Abajo
-                case 2:
-                    for (int i = 0; i < cantPosiciones; i++)
+                case 3:
+                    if ((Y - cantPosiciones) < 0)
                     {
-                        if (YFinal >= 0)
+                        return false;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                            if (YFinal >= 0)
+                            {
+                                if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                                {
+                                    return false;
+                                }
+                            }
+                            else
                             {
                                 return false;
                             }
+                            YFinal--;
                         }
-                        else
-                        {
-                            return false;
-                        }
-                        YFinal--;
                     }
                     break;
                 //Izquierda
-                case 3:
-                    for (int i = 0; i < cantPosiciones; i++)
+                case 4:
+                    if ((X - cantPosiciones) < 0)
                     {
-                        if (XFinal >= 0)
+                        return false;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                            if (XFinal >= 0)
+                            {
+                                if (tablero[XFinal, YFinal].BackColor == Color.Red)
+                                {
+                                    return false;
+                                }
+                            }
+                            else
                             {
                                 return false;
                             }
+                            XFinal--;
                         }
-                        else
-                        {
-                            return false;
-                        }
-                        XFinal--;
                     }
                     break;
             }
@@ -264,102 +291,41 @@ namespace BatallaNaval
         {
             var X = XInicial;
             var Y = YInicial;
-            int XFinal;
-            int YFinal;
+            //int XFinal;
+            //int YFinal;
             var tablero = jugador;
             switch (direccion)
             {
                 //Arriba
                 case 1:
-                    YFinal = Y + casilleros - 1;
-                    if (YFinal >= 50)
-                    {
-                        Y = 50 - casilleros;
-                    }
                     for (int i = 0; i < casilleros; i++)
                     {
-                        if (i > 0)
-                        {
-                            Y++;
-                        }
-
-                        if (Y < tablero.GetLength(0))
-                        {
-                            tablero[X, Y].BackColor = Color.Red;
-                        }
-                        else 
-                        {
-                            break;
-                        }
+                        tablero[X, Y].BackColor = Color.Red;
+                        Y++;
                     }
                     break;
                 //Derecha
                 case 2:
-                    XFinal = X + casilleros - 1;
-                    if (XFinal >= 50)
-                    {
-                        X = 50 - casilleros;
-                    }
                     for (int i = 0; i < casilleros; i++)
                     {
-                        if (i > 0)
-                        {
-                            X ++;
-                        }
-                        if (X < tablero.GetLength(1))
-                        {
-                            tablero[X, Y].BackColor = Color.Red;
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        tablero[X, Y].BackColor = Color.Red;
+                        X++;
                     }
                     break;
                 //Abajo
                 case 3:
-                    YFinal = Y - casilleros - 1;
-                    if (YFinal < 0)
-                    {
-                        Y = casilleros;
-                    }
                     for (int i = 0; i < casilleros; i++)
                     {
-                        if (i > 0)
-                        {
-                            Y --;
-                        }
-                        if (Y >= 0)
-                        {
-                            tablero[X, Y].BackColor = Color.Red;
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        tablero[X, Y].BackColor = Color.Red;
+                        Y--;
                     }
                     break;
                 //Izquierda
                 case 4:
-                    XFinal = X - casilleros - 1;
-                    if (XFinal < 0)
-                    {
-                        X = casilleros;
-                    }
                     for (int i = 0; i < casilleros; i++)
                     {
-                        if (i > 0)
-                        {
-                            X --;
-                        }
-                        if (X >= 0)
-                        {
-                            tablero[X, Y].BackColor = Color.Red;
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        tablero[X, Y].BackColor = Color.Red;
+                        X--;
                     }
                     break;
                 default:
@@ -438,6 +404,16 @@ namespace BatallaNaval
             btnLimpiarBarcos.Enabled = true;
 
             this.Cursor = Cursors.Arrow;
+        }
+
+        private void Game_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -18,3 +18,5 @@ F:\Pato\UTN\2019\SIM\TP4\BatallaNaval\obj\Debug\BatallaNaval.csproj.GenerateReso
 F:\Pato\UTN\2019\SIM\TP4\BatallaNaval\obj\Debug\BatallaNaval.csproj.CoreCompileInputs.cache
 F:\Pato\UTN\2019\SIM\TP4\BatallaNaval\obj\Debug\BatallaNaval.exe
 F:\Pato\UTN\2019\SIM\TP4\BatallaNaval\obj\Debug\BatallaNaval.pdb
+F:\Pato\UTN\2019\SIM\TP4\BatallaNaval\obj\Debug\BatallaNaval.Menu.resources
+F:\Pato\UTN\2019\SIM\TP4\BatallaNaval\obj\Debug\BatallaNaval.ModoAuto.resources

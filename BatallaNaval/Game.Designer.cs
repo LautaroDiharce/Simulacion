@@ -47,6 +47,7 @@
             this.lblEstrategiaA = new System.Windows.Forms.Label();
             this.lblGanadorA = new System.Windows.Forms.Label();
             this.lblGanadorB = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnUbicarBarcos
@@ -244,11 +245,23 @@
             this.lblGanadorB.Text = "Ganador!";
             this.lblGanadorB.Visible = false;
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.Location = new System.Drawing.Point(877, 117);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(215, 53);
+            this.btnSalir.TabIndex = 19;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.lblGanadorB);
             this.Controls.Add(this.lblGanadorA);
             this.Controls.Add(this.lblAciertosA);
@@ -270,6 +283,7 @@
             this.Controls.Add(this.btnUbicarBarcos);
             this.Name = "Game";
             this.Text = "Game";
+            this.Load += new System.EventHandler(this.Game_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,5 +310,6 @@
         private System.Windows.Forms.Label lblEstrategiaA;
         private System.Windows.Forms.Label lblGanadorA;
         private System.Windows.Forms.Label lblGanadorB;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
