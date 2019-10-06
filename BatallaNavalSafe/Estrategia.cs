@@ -41,9 +41,9 @@ namespace BatallaNaval
 
         private void CargarPares()
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 70; i++)
             {
-                for (int j = 0; j < 50; j++)
+                for (int j = 0; j < 70; j++)
                 {
                     Pares par = new Pares(i, j);
                     paresJugador1.Add(par);

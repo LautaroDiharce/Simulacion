@@ -45,12 +45,12 @@ namespace BatallaNaval
 
         private async void CargarTableroA()
         {
-            const int tileSize = 10;
-            const int gridSize = 50;
+            const int tileSize = 5;
+            const int gridSize = 70;
             var clr1 = Color.DarkGray;
             var clr2 = Color.White;
-            var ubicacionInicialX = 100;
-            var ubicacionInicialY = 180;
+            var ubicacionInicialX = 120;
+            var ubicacionInicialY = 250;
 
             tableroA = new Panel[gridSize, gridSize];
 
@@ -79,12 +79,12 @@ namespace BatallaNaval
 
         private async void CargarTableroB()
         {
-            const int tileSize = 10;
-            const int gridSize = 50;
+            const int tileSize = 5;
+            const int gridSize = 70;
             var clr1 = Color.DarkGray;
             var clr2 = Color.White;
-            var ubicacionInicialX = 800;
-            var ubicacionInicialY = 180;
+            var ubicacionInicialX = 820;
+            var ubicacionInicialY = 250;
 
             tableroB = new Panel[gridSize, gridSize];
 
@@ -131,8 +131,8 @@ namespace BatallaNaval
 
             while (cantBarcos < 10)
             {
-                int X1 = random.Next(0, 50);
-                int Y1 = random.Next(0, 50);
+                int X1 = random.Next(0, 70);
+                int Y1 = random.Next(0, 70);
                 int direccion1 = random.Next(1, 4);
 
                 if (portaaviones < 2 && ValidarUbicacion(X1, Y1, 6, direccion1, jugador))
@@ -185,7 +185,7 @@ namespace BatallaNaval
             {
                 //Arriba
                 case 1:
-                    if ((Y + cantPosiciones) >= 50)
+                    if ((Y + cantPosiciones) >= 70)
                     {
                         return false;
                     }
@@ -193,7 +193,7 @@ namespace BatallaNaval
                     {
                         for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (YFinal < 50)
+                            if (YFinal < 70)
                             {
                                 if (tablero[XFinal, YFinal].BackColor == Color.Red)
                                 {
@@ -210,7 +210,7 @@ namespace BatallaNaval
                     break;
                 //Derecha
                 case 2:
-                    if ((X + cantPosiciones) >= 50)
+                    if ((X + cantPosiciones) >= 70)
                     {
                         return false;
                     }
@@ -218,7 +218,7 @@ namespace BatallaNaval
                     {
                         for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (XFinal < 50)
+                            if (XFinal < 70)
                             {
                                 if (tablero[XFinal, YFinal].BackColor == Color.Red)
                                 {
@@ -338,9 +338,9 @@ namespace BatallaNaval
             var clr1 = Color.DarkGray;
             var clr2 = Color.White;
 
-            for (var n = 0; n < 50; n++)
+            for (var n = 0; n < 70; n++)
             {
-                for (var m = 0; m < 50; m++)
+                for (var m = 0; m < 70; m++)
                 {
                     // color the backgrounds
                     if (n % 2 == 0)
@@ -383,7 +383,7 @@ namespace BatallaNaval
             Estrategia juego = new Estrategia(tableroA, tableroB);
             while (juego.aciertosJugador1 < 40 && juego.aciertosJugador2 < 40)
             {
-                await Task.Delay(1);
+                await Task.Delay(60);
 
                 juego.TiroRandom();
                 lblAciertosA.Text = juego.aciertosJugador1.ToString();

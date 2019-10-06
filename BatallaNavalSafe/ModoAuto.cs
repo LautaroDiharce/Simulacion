@@ -64,8 +64,8 @@ namespace BatallaNaval
 
         private void CargarTableroA()
         {
-            const int tileSize = 10;
-            const int gridSize = 50;
+            const int tileSize = 5;
+            const int gridSize = 70;
             var clr1 = Color.DarkGray;
             var clr2 = Color.White;
             var ubicacionInicialX = 200;
@@ -98,8 +98,8 @@ namespace BatallaNaval
 
         private void CargarTableroB()
         {
-            const int tileSize = 10;
-            const int gridSize = 50;
+            const int tileSize = 5;
+            const int gridSize = 70;
             var clr1 = Color.DarkGray;
             var clr2 = Color.White;
             var ubicacionInicialX = 900;
@@ -141,8 +141,8 @@ namespace BatallaNaval
 
             while (cantBarcos < 10)
             {
-                int X1 = random.Next(0, 50);
-                int Y1 = random.Next(0, 50);
+                int X1 = random.Next(0, 70);
+                int Y1 = random.Next(0, 70);
                 int direccion1 = random.Next(1, 4);
 
                 if (portaaviones < 2 && ValidarUbicacion(X1, Y1, 6, direccion1, jugador))
@@ -195,7 +195,7 @@ namespace BatallaNaval
             {
                 //Arriba
                 case 1:
-                    if ((Y + cantPosiciones) >= 50)
+                    if ((Y + cantPosiciones) >= 70)
                     {
                         return false;
                     }
@@ -203,7 +203,7 @@ namespace BatallaNaval
                     {
                         for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (YFinal < 50)
+                            if (YFinal < 70)
                             {
                                 if (tablero[XFinal, YFinal].BackColor == Color.Red)
                                 {
@@ -220,7 +220,7 @@ namespace BatallaNaval
                     break;
                 //Derecha
                 case 2:
-                    if ((X + cantPosiciones) >= 50)
+                    if ((X + cantPosiciones) >= 70)
                     {
                         return false;
                     }
@@ -228,7 +228,7 @@ namespace BatallaNaval
                     {
                         for (int i = 0; i < cantPosiciones; i++)
                         {
-                            if (XFinal < 50)
+                            if (XFinal < 70)
                             {
                                 if (tablero[XFinal, YFinal].BackColor == Color.Red)
                                 {
