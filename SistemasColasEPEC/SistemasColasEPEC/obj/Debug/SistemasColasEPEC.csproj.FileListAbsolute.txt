@@ -1,0 +1,48 @@
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe.config
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.pdb
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csprojAssemblyReference.cache
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmMenu.resources
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmPrimerSistema.resources
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.Properties.Resources.resources
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.GenerateResource.cache
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.CoreCompileInputs.cache
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.exe
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.pdb
+D:\Usuario\Escritorio\Cosas Raras\facultad\simulacion\TP5\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmSegundoSistema.resources
+E:\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe.config
+E:\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe
+E:\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.pdb
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csprojAssemblyReference.cache
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmMenu.resources
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmPrimerSistema.resources
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmSegundoSistema.resources
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.Properties.Resources.resources
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.GenerateResource.cache
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.CoreCompileInputs.cache
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.exe
+E:\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.pdb
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe.config
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.pdb
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csprojAssemblyReference.cache
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmMenu.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmPrimerSistema.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmSegundoSistema.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.Properties.Resources.resources
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.GenerateResource.cache
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.CoreCompileInputs.cache
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.exe
+C:\Users\lauta\OneDrive\Documents\GitHub\Simulacion\SistemasColasEPEC\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.pdb
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe.config
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.exe
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\bin\Debug\SistemasColasEPEC.pdb
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csprojAssemblyReference.cache
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmMenu.resources
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmPrimerSistema.resources
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.frmSegundoSistema.resources
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.Properties.Resources.resources
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.GenerateResource.cache
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.csproj.CoreCompileInputs.cache
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.exe
+C:\Users\Azul Vela\Documents\NAHUEL PIGUILLEM\SistemasColasEPEC(ihr)\SistemasColasEPEC\obj\Debug\SistemasColasEPEC.pdb
